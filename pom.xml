@@ -1,0 +1,154 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>it.test.hibernate</groupId>
+  <artifactId>hbn4</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>war</packaging>
+  
+  <properties>
+		<spring-framework.version>4.3.10.RELEASE</spring-framework.version>
+		<spring-data-jpa.version>1.11.8.RELEASE</spring-data-jpa.version>
+		<hibernate.version>4.3.6.Final</hibernate.version>
+		<commons-dbcp.version>1.4</commons-dbcp.version>
+		<joda-time.version>2.3</joda-time.version>
+		<slf4j.version>1.7.25</slf4j.version>
+		<log4j.version>1.2.17</log4j.version>
+		
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+	
+  <dependencies>
+  
+  	 <!-- Spring -->
+     <dependency>
+         <groupId>org.springframework</groupId>
+         <artifactId>spring-core</artifactId>
+         <version>${spring-framework.version}</version>
+     </dependency>
+     <dependency>
+         <groupId>org.springframework</groupId>
+         <artifactId>spring-context</artifactId>
+         <version>${spring-framework.version}</version>
+     </dependency>
+     <dependency>
+         <groupId>org.springframework</groupId>
+         <artifactId>spring-tx</artifactId>
+         <version>${spring-framework.version}</version>
+     </dependency>
+     <dependency>
+         <groupId>org.springframework</groupId>
+         <artifactId>spring-orm</artifactId>
+         <version>${spring-framework.version}</version>
+     </dependency>
+	 <!-- <dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-jdbc</artifactId>
+		<version>${spring-framework.version}</version>
+	 </dependency>  -->
+	 <dependency>
+	    <groupId>org.springframework.data</groupId>
+	    <artifactId>spring-data-jpa</artifactId>
+	    <version>${spring-data-jpa.version}</version>
+	 </dependency>
+
+     <!-- Hibernate -->
+     <dependency>
+         <groupId>org.hibernate</groupId>
+         <artifactId>hibernate-core</artifactId>
+         <version>${hibernate.version}</version>
+     </dependency>
+     <dependency>
+		<groupId>org.hibernate</groupId>
+		<artifactId>hibernate-entitymanager</artifactId>
+		<version>${hibernate.version}</version>
+	</dependency>
+	<!--  <dependency>
+		<groupId>org.hibernate.common</groupId>
+		<artifactId>hibernate-commons-annotations</artifactId>
+		<version>4.0.5.Final</version>
+	</dependency>
+	<dependency>
+		<groupId>org.hibernate.javax.persistence</groupId>
+		<artifactId>hibernate-jpa-2.1-api</artifactId>
+		<version>1.0.0.Final</version>
+	</dependency> -->
+	
+	<!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+	<dependency>
+	    <groupId>javax.servlet</groupId>
+	    <artifactId>javax.servlet-api</artifactId>
+	    <version>3.1.0</version>
+	    <scope>provided</scope>
+	</dependency>
+	
+	<!-- https://mvnrepository.com/artifact/commons-dbcp/commons-dbcp -->
+	<dependency>
+	    <groupId>commons-dbcp</groupId>
+	    <artifactId>commons-dbcp</artifactId>
+	    <version>${commons-dbcp.version}</version>
+	</dependency>
+	
+	<!-- Joda-Time -->
+	<dependency>
+		<groupId>joda-time</groupId>
+		<artifactId>joda-time</artifactId>
+		<version>${joda-time.version}</version>
+	</dependency>
+		
+	<!-- lanciare: mvn install:install-file -Dfile=%jboss_eap64_home%/modules/system/layers/base/com/oracle/jdbc/main/ojdbc6.jar -DgroupId=it.myst -DartifactId=oracle-jdbc6 -Dversion=1.0 -Dpackaging=jar
+            (al posto di %jboss_eap64_home% il proprio path jboss eap 6.4) -->
+    <dependency>
+    	<groupId>it.myst</groupId>
+        <artifactId>oracle-jdbc6</artifactId>
+        <version>1.0</version>
+    </dependency>
+    
+    <!-- Logging -->
+    <dependency>
+		<groupId>org.slf4j</groupId>
+		<artifactId>slf4j-api</artifactId>
+		<version>${slf4j.version}</version>
+	</dependency>    
+	<dependency>
+		<groupId>log4j</groupId>
+		<artifactId>log4j</artifactId>
+		<version>${log4j.version}</version>
+	</dependency>  
+	<dependency>
+		<groupId>org.slf4j</groupId>
+		<artifactId>slf4j-log4j12</artifactId>
+		<version>${slf4j.version}</version>
+	</dependency>
+      
+	
+  </dependencies>
+  
+  <build>
+    	<plugins>
+	        <plugin>
+	            <groupId>org.apache.maven.plugins</groupId>
+	            <artifactId>maven-war-plugin</artifactId>
+	            <version>2.6</version>
+	            <configuration>
+	                <failOnMissingWebXml>false</failOnMissingWebXml>
+	            </configuration>
+	        </plugin>
+	    </plugins>
+    
+       	<pluginManagement>
+           <plugins>
+               <plugin>
+                   <groupId>org.apache.maven.plugins</groupId>
+                   <artifactId>maven-compiler-plugin</artifactId>
+                   <version>3.2</version>
+                   <configuration>
+                       <source>1.7</source>
+                       <target>1.7</target>
+                   </configuration>
+               </plugin>
+           </plugins>
+       </pluginManagement>
+    </build>
+ 
+	  
+</project>
