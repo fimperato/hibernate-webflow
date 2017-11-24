@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow
+        http://www.springframework.org/schema/webflow/spring-webflow-2.4.xsd" 
+    parent="parent-flow">
+	
+	<var name="searchCriteria" class="it.myst.swf.utility.web.data.SearchCriteria"/>
+	
+<!-- 	<on-start> -->
+<!-- 		<set name="sessionBean.codGestione" value="059"/> -->
+<!-- 	</on-start> -->
+	
+	<view-state id="mystOne">
+		<on-render>
+			<evaluate expression="utilityService.findForecasts('')"
+				/>
+		</on-render>
+		
+<!-- 		<transition on="searchInfoData" to=showInfos/> -->
+		<transition on="goToPaginaGestioneOperazioni" to="paginaGestioneOperazioni"/>
+		<transition on="goToMySubflow" to="showMySubflow"/>
+		<transition on="checkInfoData" to="mystTwo">
+			<evaluate expression="utilityService.findForecasts(searchCriteria.searchString)" 
+				result="flowScope.myforecasts" result-type="dataModel"  />
+			<set name="flowScope.mysearch" value="searchCriteria.searchString" />
+		</transition>
+	</view-state>
+	
+	<action-state id="paginaGestioneOperazioni">
+		<evaluate expression="testOperazioniCBean.initData()" />
+	    <evaluate expression="testOperazioniCBean.actionStateGestioneOperazioni()" />
+	    <transition on="gestioneOperazioniTwo" to="mystTwo" />
+	   	<transition on="gestioneOperazioniThree" to="mystThree" />
+	</action-state>
+	
+	<view-state id="mystTwo">
+		<on-render>
+			<evaluate expression="utilityService.evalutateStringVar(flowScope.mysearch)" />
+			<evaluate expression="utilityService.evalutateForecastsVar(flowScope.myforecasts)" />
+		</on-render>
+	</view-state>
+	
+	<view-state id="mystThree">
+		<transition on="backToOne" to="mystOne" >
+			<evaluate expression="testOperazioniCBean.checkAttributeScope()" />
+		</transition>
+<!-- 		mystFlowFinish -->
+	</view-state>
+	
+	<subflow-state id="showMySubflow" subflow="saltoTest">
+		<on-entry>
+			<evaluate expression="saltoTestCBean.initDataExchange()"
+				result="conversationScope.myDatiSaltoByThisFlow" />
+		</on-entry>
+<!-- 		<input name="mysalto_0" value="flowScope.myDatiSaltoByThisFlow" /> -->
+		<input name="mysalto" value="saltoTestCBean.buildDataSaltoSelezionato()" />
+		<transition on="ricercaDatiSalto" to="ricercaDatiSalto" />
+		
+		<!-- end of child state: -->
+		<transition on="redirectedToASecondFlow" to="redirectedToASecondFlow" />
+	</subflow-state>
+	
+	<end-state id="redirectedToASecondFlow"
+			view="externalRedirect:servletRelative:/secondFlow" />
+		
+	<end-state id="mystFlowFinish" />
+	
+</flow>

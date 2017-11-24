@@ -1,0 +1,25 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	    		xmlns:ui="http://java.sun.com/jsf/facelets"
+	  			xmlns:h="http://java.sun.com/jsf/html"
+	  			xmlns:f="http://java.sun.com/jsf/core"
+	  			xmlns:p="http://primefaces.org/ui"
+				template="/WEB-INF/template/standardTemplate.xhtml" >
+
+<ui:define name="leftSide">
+	<p>
+		Second (notes section) - My-Flow-Two
+	</p>
+</ui:define>
+
+<ui:define name="content">
+
+	<p:panel header="My-Flow-Two Header" toggleable="true" toggleSpeed="100">
+		<h:form>
+			<p:messages globalOnly="true" />
+			{Page My-Flow-Two}
+		</h:form>			  
+	</p:panel>		  
+
+</ui:define>
+</ui:composition>

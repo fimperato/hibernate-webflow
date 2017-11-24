@@ -1,0 +1,93 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	    		xmlns:ui="http://java.sun.com/jsf/facelets"
+	  			xmlns:h="http://java.sun.com/jsf/html"
+	  			xmlns:f="http://java.sun.com/jsf/core"
+	  			xmlns:p="http://primefaces.org/ui"
+				template="/WEB-INF/template/standardTemplate.xhtml" >
+
+
+	<!--********CONTENT*******-->
+
+
+	<ui:define name="content">
+
+		<h:form id="paginaErrore" styleClass="errorPage">
+			<div class="header-content-dialog">
+				<span>ERRORE</span>
+			</div>
+			<div id="idErrore" style="padding-top: 10px;">
+				<h:outputLabel class="error text">Error Id: </h:outputLabel>
+				<h:outputLabel>#{erroreBBean.id}</h:outputLabel>
+			</div>
+			<div id="codiceErrore" style="padding-top: 10px;">
+				<h:outputLabel class="error text">Error Code: </h:outputLabel>
+				<h:outputLabel>#{erroreBBean.codice}</h:outputLabel>
+			</div>
+			<div id="descrizioneErrore" style="padding-top: 10px;">
+				<h:outputLabel class="error text">Error Desc: </h:outputLabel>
+				<h:outputLabel> #{erroreBBean.descrizione}</h:outputLabel>
+			</div>
+			<div id="dettaglioErrore" style="padding-top: 10px;">
+				<h:outputLabel class="error text">Error details: </h:outputLabel>
+				<h:outputLabel> #{erroreBBean.dettaglio}</h:outputLabel>
+			</div>			
+			<div id="usernameErrore" style="padding-top: 10px;">
+				<h:outputLabel class="error text">Error user: </h:outputLabel>
+				<h:outputLabel>#{erroreBBean.username}</h:outputLabel>
+			</div>
+			<div id="gravitaErrore" style="padding-top: 10px;">
+				<h:outputLabel class="error text">Severity: </h:outputLabel>
+				<h:outputLabel>#{erroreBBean.gravita}</h:outputLabel>
+			</div>
+			<div id="dataOraErrore" style="padding-top: 10px;">
+				<h:outputLabel class="error text">Time: </h:outputLabel>
+				<h:outputLabel>#{erroreBBean.dataOra}</h:outputLabel>
+			</div>
+					
+			<br/><br/>
+			
+			<div id="stackTraceErrore" style="padding-top: 10px;">
+				<h:outputLabel class="error text" rendered="#{erroreBBean.renderStackTrace}">Stacktrace: </h:outputLabel>
+				
+			</div>
+			<div  style="padding-top: 10px;">
+				<h:outputLabel class="error stacktrace">#{erroreBBean.stacktrace}</h:outputLabel>
+			</div>
+			<br/>
+			<br/>
+			
+			
+			<ui:repeat var="messaggio" value="#{erroreBBean.messaggiErrore}">
+			
+				<div style="padding-top: 10px;">
+					<h:outputLabel class="error text">Severity: </h:outputLabel>
+					<h:outputLabel>#{messaggio.severity}</h:outputLabel>
+				</div>
+				<div style="padding-top: 10px;">
+					<h:outputLabel class="error text">Code: </h:outputLabel>
+					<h:outputLabel>#{messaggio.code}</h:outputLabel>
+				</div>
+				<div style="padding-top: 10px;">
+					<h:outputLabel class="error text">Desc: </h:outputLabel>
+					<h:outputLabel> #{messaggio.desc}</h:outputLabel>
+				</div>
+				<div  style="padding-top: 10px;">
+					<h:outputLabel class="error text">Detail: </h:outputLabel>
+					<h:outputLabel> #{messaggio.detail}</h:outputLabel>
+				</div>	
+			
+			</ui:repeat>
+			<br/>
+			<br/>
+			<div style="padding-top: 10px; text-align: center;">
+				<p:commandButton id="redirectToOne" value="Back One" 
+					action="redirectToOne" update="@this" />
+			</div>
+			
+
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>

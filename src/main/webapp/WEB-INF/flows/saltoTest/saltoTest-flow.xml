@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/webflow
+		http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd" 
+    parent="parent-flow">
+	
+<!-- 	<input name="mysalto_0" /> -->
+	<input name="mysalto" />
+	
+	<on-start>
+		<set name="flowScope.myFlowData" value="saltoTestCBean.initFlow(conversationScope.myDatiSaltoByThisFlow,mysalto)" />
+	</on-start>
+	
+	<view-state id="ricercaDatiSalto">
+		<on-render>
+			<evaluate expression="utilityService.findForecasts('ricercaDatiSalto_DONE')"
+				/>
+		</on-render>
+		
+		<transition on="gotoRedirectToASecondoFlow" to="redirectedToASecondFlow">
+			<evaluate expression="testOperazioniCBean.checkAttributeScope()"></evaluate>
+		</transition>
+	</view-state>
+
+	
+	<end-state id="saltoTestFlowFinish" />
+	<end-state id="redirectedToASecondFlow" /> <!-- related to a transition in parent flow -->
+		
+</flow>

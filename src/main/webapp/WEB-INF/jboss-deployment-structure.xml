@@ -1,0 +1,18 @@
+<jboss-deployment-structure>
+	<deployment>
+	    <exclusions>
+	        <module name="org.slf4j" />
+	        <module name="org.slf4j.impl" />
+	        <module name="org.apache.log4j" />
+	        <module name="javax.persistence.api" />
+	        <module name="org.hibernate" />
+	    </exclusions>
+	    <dependencies>
+	        <module name="org.jboss.ironjacamar.jdbcadapters" />
+	        <module name="org.hornetq" />
+	        <module name="org.hornetq.ra" />
+	        <module name="org.jboss.ejb3" />
+	        <module name="org.jboss.ejb-client" />
+	    </dependencies>
+	</deployment>
+</jboss-deployment-structure>

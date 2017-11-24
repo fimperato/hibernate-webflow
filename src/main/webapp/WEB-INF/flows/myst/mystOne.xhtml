@@ -1,0 +1,40 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	    		xmlns:ui="http://java.sun.com/jsf/facelets"
+	  			xmlns:h="http://java.sun.com/jsf/html"
+	  			xmlns:f="http://java.sun.com/jsf/core"
+	  			xmlns:p="http://primefaces.org/ui"
+				template="/WEB-INF/template/standardTemplate.xhtml" >
+
+<ui:define name="leftSide">
+	<p>
+		First (side section): My-Flow-One
+	</p>
+</ui:define>
+
+<ui:define name="content">
+
+	<p:panel header="Flow Selection Accordion" toggleable="true" toggleSpeed="100">
+		<h:form>
+			<p:messages globalOnly="true" />
+			<h:panelGrid columns="2">
+				<p:commandButton id="goToGestioneInfo" value="Go To #Gestione Info Flow#"
+						 action="goToPaginaGestioneOperazioni" update="@form" />
+<!-- 			<h:outputLabel for="searchString"></h:outputLabel> -->
+<!-- 			<h:inputText id="searchString" value="#{searchCriteria.searchString}" /> -->
+			</h:panelGrid>
+<!-- 			<p:tooltip for="searchString" targetPosition="topRight" position="bottomLeft" value="..." style="cream" /> -->
+				
+			<h:panelGrid columns="2">
+				<p:commandButton id="gotoFlowTwo" value="Go to #My-Flow-Two#" 
+					action="checkInfoData" update="@form" />
+			</h:panelGrid>
+			<h:panelGrid columns="2">
+				<p:commandButton id="gotoSubflow" value="Go to #SubFlow#" 
+					action="goToMySubflow" update="@this" />
+			</h:panelGrid>
+		</h:form>			  
+	</p:panel>		  
+
+</ui:define>
+</ui:composition>

@@ -1,0 +1,31 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	    		xmlns:ui="http://java.sun.com/jsf/facelets"
+	  			xmlns:h="http://java.sun.com/jsf/html"
+	  			xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:sf="http://www.springframework.org/tags/faces"
+				template="/WEB-INF/template/standardTemplate.xhtml" >
+
+	<ui:define name="leftSide">
+		<p>
+			[Intro page - left side]
+		</p>
+	</ui:define>
+	
+	<ui:define name="content">
+	<div>
+		<h1>Title</h1>
+		
+		<hr />
+		<p>
+			{content}
+		</p>
+		
+		<p>
+			<a href="main">Start main-flow here.</a>
+			
+			<a href="myst">Start second-flow here.</a>
+		</p>
+	</div>
+	</ui:define>
+</ui:composition>

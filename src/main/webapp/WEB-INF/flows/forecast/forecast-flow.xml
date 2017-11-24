@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow
+        http://www.springframework.org/schema/webflow/spring-webflow-2.4.xsd">
+
+	<secured attributes="ROLE_USER" />
+
+	<input name="productId" required="true" />
+
+	<on-start>
+		<evaluate expression="utilityService.createForecast('', currentUser.name, 0, null)" result="flowScope.forecast" />
+	</on-start>
+	
+	<view-state id="enterForecastDetails" model="forecast">
+		<transition on="proceed" to="reviewForecast" />
+		<transition on="cancel" to="forecastCancelled" bind="false" />
+	</view-state>
+	
+	<view-state id="reviewForecast">
+		<transition on="confirm" to="forecastConfirmed">
+			<evaluate expression="utilityService.persistForecast(forecast)" />
+		</transition>
+		<transition on="revise" to="enterForecastDetails" />
+		<transition on="cancel" to="forecastCancelled" />
+	</view-state>
+	
+	<end-state id="forecastConfirmed" />
+
+	<end-state id="forecastCancelled" />
+		
+</flow>
