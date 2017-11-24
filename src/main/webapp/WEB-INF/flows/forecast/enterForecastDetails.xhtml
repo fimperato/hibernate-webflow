@@ -1,0 +1,56 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	    		xmlns:ui="http://java.sun.com/jsf/facelets"
+	  			xmlns:h="http://java.sun.com/jsf/html"
+	  			xmlns:f="http://java.sun.com/jsf/core"
+	  			xmlns:p="http://primefaces.org/ui"
+				template="/WEB-INF/template/standardTemplate.xhtml" >
+				
+<ui:define name="leftSide">
+	<p>
+		Forecast Detail left-side
+	</p>
+</ui:define>
+<ui:define name="content">
+	<h:form id="forecastForm">
+		<p:fieldset legend="Product Form">
+			<p:messages />
+			<div class="large">
+				${forecast.product.name},
+				${forecast.product.state}
+			</div>
+			<hr/>
+			
+			<div class="field">
+				<div class="span-4">
+					<h:outputLabel for="startDate">Start:</h:outputLabel>
+				</div>
+				<div class="span-5">
+					<p>
+						<p:calendar id="startDate" label="Start date" 
+							value="#{forecast.startDate}" pattern="MM-dd-yyyy" required="true" />
+	               	</p>
+				</div>
+				
+			</div>
+			<div class="field">
+				<div class="span-4">
+					<h:outputLabel for="beds">Preference:</h:outputLabel>
+				</div>
+				<div class="span-5">
+					<p>
+						<h:selectOneMenu id="beds" value="#{forecast.name}">
+							<f:selectItems value="#{referenceData.bedOptions}"/>
+						</h:selectOneMenu>
+					</p>	
+				</div>
+			</div>
+
+			<div>
+				<p:commandButton id="proceed" action="proceed" value="Proceed" update="@form" />
+				<p:commandButton id="cancel" value="Cancel" action="cancel" immediate="true" />
+			</div>		
+		</p:fieldset>
+	</h:form>
+</ui:define>
+</ui:composition>

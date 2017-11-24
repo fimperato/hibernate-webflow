@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow
+        http://www.springframework.org/schema/webflow/spring-webflow-2.4.xsd">
+        
+    <end-state id="ErrorPage_Flow" view="externalRedirect:servletRelative:/error"/>
+
+	<end-state id="myst_flowEndState" view="externalRedirect:servletRelative:/myst"/>
+	
+	<global-transitions>
+		
+		<transition on="ErrorPage" to="ErrorPage_Flow">
+			
+		</transition>
+		
+		<transition on="gotoMyst" to="myst_flowEndState">
+			<evaluate expression="testOperazioniCBean.checkAttributeScope()" />
+		</transition>
+		
+	</global-transitions>
+	
+	<on-end>
+    	<evaluate expression="sessionBean.initPrevViewState()"/>
+    </on-end>
+</flow>

@@ -1,0 +1,39 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	    		xmlns:ui="http://java.sun.com/jsf/facelets"
+	  			xmlns:h="http://java.sun.com/jsf/html"
+	  			xmlns:f="http://java.sun.com/jsf/core"
+	  			xmlns:p="http://primefaces.org/ui"
+				template="/WEB-INF/template/standardTemplate.xhtml" >
+				
+	<ui:define name="leftSide">
+		<p>
+			[Review product - left side]
+		</p>
+	</ui:define>
+	<ui:define name="content">
+		<h:form>
+			<p:dataTable id="products" var="h" value="#{products}" paginator="true" dynamic="true"
+					rows="#{products.pageSize}" page="#{products.currentPage}" lazy="true">
+		        <f:facet name="header">
+		        	Product Search Results<br/>
+		        	<p:commandLink value="Modify or start search again" action="changeSearch" styleClass="alt" />
+		        </f:facet>
+				<p:column sortBy="#{h.name}">
+					<f:facet name="header">Name</f:facet>
+					#{h.name}
+				</p:column>
+				<p:column sortBy="#{h.state}">
+					<f:facet name="header">State</f:facet>
+					#{h.state}
+				</p:column> 
+				<p:column>
+					<f:facet name="header">Action</f:facet>
+					<p:commandButton id="viewProductLink" value="View" action="select" icon="ui-icon-search">
+						<f:setPropertyActionListener value="#{h}" target="#{products.selected}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>

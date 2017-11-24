@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow
+        http://www.springframework.org/schema/webflow/spring-webflow-2.4.xsd">
+
+	<var name="searchCriteria" class="it.myst.swf.utility.web.data.SearchCriteria"/>
+	
+	<view-state id="enterSearchCriteria">
+		<on-render>
+			<evaluate expression="utilityService.findForecasts(currentUser?.name)"
+				result="viewScope.forecasts" result-type="dataModel" />
+		</on-render>
+		<transition on="search" to="reviewProducts"/>
+		<transition on="cancelForecast">
+			<evaluate expression="utilityService.cancelForecast(forecasts.selectedRow)" />
+		</transition>
+	</view-state>
+	
+	<view-state id="reviewProducts">
+		<var name="products" class="it.myst.swf.utility.web.ProductLazyDataModel"/>
+		<on-render>
+			<evaluate expression="products.setSearchCriteria(searchCriteria)" />
+		</on-render>
+		<transition on="select" to="reviewProduct">
+			<set name="flowScope.product" value="products.selected" />
+		</transition>
+		<transition on="changeSearch" to="enterSearchCriteria" />
+	</view-state>
+	
+	<view-state id="reviewProduct">
+		<transition on="forecast" to="productForecast" />
+		<transition on="cancel" to="reviewProducts" />
+	</view-state>
+
+	<subflow-state id="productForecast" subflow="forecast">
+		<input name="productId" value="product.id" />
+		<transition on="forecastConfirmed" to="finish" />
+		<transition on="forecastCancelled" to="enterSearchCriteria" />
+	</subflow-state>
+			
+	<end-state id="finish" />
+	
+</flow>

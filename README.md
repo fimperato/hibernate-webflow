@@ -13,5 +13,8 @@ Settare i proprio parametri di connessione sul persistence.properties.
 
 Eseguire AppMain per il test di configurazione, connessione e operazioni CRUD.
 
+## Application Server 
+
+Test eseguiti su JBoss EAP 6.4
 
 
