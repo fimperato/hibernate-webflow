@@ -4,6 +4,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
+import it.myst.swf.core.config.db.HibernateConfiguration;
 import it.myst.swf.core.config.db.PersistenceContextConfiguration;
 
 @Configuration
@@ -12,6 +13,7 @@ import it.myst.swf.core.config.db.PersistenceContextConfiguration;
 	"it.myst.swf.core.web.backingbean", "it.myst.swf.core.backingbean", 
 	"it.myst.swf.web.backingbean", "it.myst.swf.web.controllerbean", "it.myst.swf.core.spring.utils" })
 @Import(value={
+		HibernateConfiguration.class,
 		PersistenceContextConfiguration.class,
 		WebMvcConfig.class,
 		WebFlowConfig.class,
