@@ -83,14 +83,6 @@ public class PersistenceContextConfiguration {
        transactionManager.setEntityManagerFactory(entityManagerFactory(dataSource, env).getObject());
        return transactionManager;
     }
-    
-	@Bean
-    public DataSource getDataSource() {
-		 final JndiDataSourceLookup dsLookup = new JndiDataSourceLookup();
-		 dsLookup.setResourceRef(true);
-		 DataSource dataSource = dsLookup.getDataSource("java:jboss/datasources/LocaleWebDS");
-		 return dataSource;
-    }
 	
 //    @Bean
 //    public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean(DataSource dataSource, JpaVendorAdapter jpaVendorAdapter) {
