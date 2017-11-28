@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.cache.annotation.Cacheable;
+
 @Entity
 @Table(name = "CUSTOMER")
 public class User implements Serializable {
@@ -57,4 +59,15 @@ public class User implements Serializable {
     public String toString() {
     	return "User(" + username + ")";
     }
+    
+    @Cacheable("usercache") 
+	public String getCachedUser(int usrId){
+		System.out.println("---Inside getCachedUser() Method---");
+		if(usrId == 1){			
+			return "A-user";
+		}else{
+			return "B-user";
+		}
+	}
+    
 }

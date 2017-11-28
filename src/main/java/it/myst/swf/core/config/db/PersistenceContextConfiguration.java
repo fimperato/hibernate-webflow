@@ -71,6 +71,11 @@ public class PersistenceContextConfiguration {
         jpaProperties.put("hibernate.format_sql", 
                 env.getRequiredProperty("hibernate.format_sql")
         );
+        
+        // Jndi config:
+//        env.put("java.naming.factory.initial","org.jnp.interfaces.NamingContextFactory");
+//        env.put("java.naming.provider.url","jnp://localhost:1099");
+//        env.put("java.naming.factory.url.pkgs","org.jboss.naming:org.jnp.interfaces");
  
         entityManagerFactoryBean.setJpaProperties(jpaProperties);
  
@@ -84,6 +89,7 @@ public class PersistenceContextConfiguration {
        return transactionManager;
     }
 	
+	// UNUSED:
 //    @Bean
 //    public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean(DataSource dataSource, JpaVendorAdapter jpaVendorAdapter) {
 //        LocalContainerEntityManagerFactoryBean lef = new LocalContainerEntityManagerFactoryBean();
