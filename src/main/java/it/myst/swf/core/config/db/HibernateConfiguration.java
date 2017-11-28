@@ -30,6 +30,9 @@ public class HibernateConfiguration {
     @Autowired
     private Environment environment;
  
+    /*
+     * For SessionFactory - dataSource case
+     */
     @Bean
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
@@ -39,6 +42,9 @@ public class HibernateConfiguration {
         return sessionFactory;
      }
      
+    /*
+     * For SessionFactory - dataSource case
+     */
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
@@ -52,6 +58,7 @@ public class HibernateConfiguration {
         return dataSource;
     }
     
+    // to disable to standalone app main - https://www.intertech.com/Blog/spring-4-conditional-bean-configuration/
     @Bean
     public DataSource getDataSource() {
 		 final JndiDataSourceLookup dsLookup = new JndiDataSourceLookup();

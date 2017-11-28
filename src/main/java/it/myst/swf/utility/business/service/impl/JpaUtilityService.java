@@ -1,4 +1,4 @@
-package it.myst.swf.utility.business.service;
+package it.myst.swf.utility.business.service.impl;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import it.myst.swf.utility.business.service.UtilityService;
 import it.myst.swf.utility.domain.entity.Forecast;
 import it.myst.swf.utility.domain.entity.Product;
 import it.myst.swf.utility.domain.entity.User;
