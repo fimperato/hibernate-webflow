@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -18,6 +19,8 @@ import org.springframework.jdbc.datasource.lookup.JndiDataSourceLookup;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+import it.myst.swf.core.config.condition.JndiContainerEnabledCondition;
 
 @Configuration
 @EnableTransactionManagement
@@ -58,8 +61,13 @@ public class HibernateConfiguration {
         return dataSource;
     }
     
-    // to disable to standalone app main - https://www.intertech.com/Blog/spring-4-conditional-bean-configuration/
+    /**
+     * Disabled in standalone app main
+     * 
+     * @return DataSource
+     */
     @Bean
+    @Conditional(JndiContainerEnabledCondition.class)
     public DataSource getDataSource() {
 		 final JndiDataSourceLookup dsLookup = new JndiDataSourceLookup();
 		 dsLookup.setResourceRef(true);

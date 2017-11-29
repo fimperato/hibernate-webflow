@@ -14,7 +14,7 @@ public class SpringEhcacheApplication {
 	private static Logger logger = LoggerFactory.getLogger(SpringEhcacheApplication.class);
 
 	/**
-	 * Used src\main\resources\ehcache.xml in config
+	 * Main to test ehcache config
 	 * 
 	 * @param args
 	 */

@@ -2,6 +2,7 @@ package it.myst.swf.core.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.faces.mvc.JsfView;
 import org.springframework.faces.webflow.JsfFlowHandlerAdapter;
@@ -11,8 +12,16 @@ import org.springframework.web.servlet.view.UrlBasedViewResolver;
 import org.springframework.webflow.mvc.servlet.FlowHandlerAdapter;
 import org.springframework.webflow.mvc.servlet.FlowHandlerMapping;
 
+import it.myst.swf.core.config.condition.MvcEnabledCondition;
 
+/**
+ * Disabled in standalone app main
+ * 
+ * @author Francesco
+ *
+ */
 @Configuration
+@Conditional(MvcEnabledCondition.class)
 public class WebMvcConfig {
 
 	@Autowired
