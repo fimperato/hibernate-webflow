@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.config.CustomScopeConfigurer;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.faces.config.AbstractFacesFlowConfiguration;
 import org.springframework.faces.webflow.FlowFacesContextLifecycleListener;
@@ -14,7 +15,16 @@ import org.springframework.webflow.executor.FlowExecutor;
 import org.springframework.webflow.scope.ConversationScope;
 import org.springframework.webflow.security.SecurityFlowExecutionListener;
 
+import it.myst.swf.core.config.condition.MvcEnabledCondition;
+
+/**
+ * Disabled in standalone app main
+ * 
+ * @author Francesco
+ *
+ */
 @Configuration
+@Conditional(MvcEnabledCondition.class)
 public class WebFlowConfig extends AbstractFacesFlowConfiguration {
 
 	@Bean

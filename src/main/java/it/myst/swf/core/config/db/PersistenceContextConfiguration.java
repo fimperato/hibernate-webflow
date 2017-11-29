@@ -18,7 +18,7 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 
 @Configuration
-@PropertySource(value = { "classpath:persistence.properties" })
+@PropertySource(value = { "classpath:persistence.properties", "classpath:application.properties" })
 public class PersistenceContextConfiguration {
 	
 	@Autowired

@@ -15,8 +15,8 @@ import it.myst.swf.core.config.db.PersistenceContextConfiguration;
 @Import(value={
 		HibernateConfiguration.class,
 		PersistenceContextConfiguration.class,
-		WebMvcConfig.class, // to disable to standalone app main
-		WebFlowConfig.class, // to disable to standalone app main
+		WebMvcConfig.class, 
+		WebFlowConfig.class,
 		WebBeanConfig.class,
 		BeanConfig.class
 	})

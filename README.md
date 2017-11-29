@@ -4,6 +4,7 @@ Progetto base con:
 
  - Spring 4
  - Hibernate 4
+ - Ehcache 2.10
  - Java Configuration
  - Log4j
  
