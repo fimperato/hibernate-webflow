@@ -24,7 +24,8 @@ import it.myst.swf.core.config.condition.JndiContainerEnabledCondition;
 
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories(basePackages = {"it.myst.swf.utility.domain"})
+//@EnableJpaRepositories(basePackages = {"it.myst.swf.utility.domain"})
+@EnableJpaRepositories(basePackages = {"it.myst.swf.utility.repository.dao"})
 @ComponentScan({"it.myst.swf.utility.domain"})
 public class HibernateConfiguration {
  

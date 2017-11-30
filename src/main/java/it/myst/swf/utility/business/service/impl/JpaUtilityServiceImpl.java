@@ -28,13 +28,13 @@ import it.myst.swf.utility.web.data.SearchCriteria;
  */
 @Service("utilityService")
 @Repository
-public class JpaUtilityService implements UtilityService, Serializable {
+public class JpaUtilityServiceImpl implements UtilityService, Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	private EntityManager em;
 	
-	private static Logger logger = LoggerFactory.getLogger(JpaUtilityService.class);
+	private static Logger logger = LoggerFactory.getLogger(JpaUtilityServiceImpl.class);
 	
 	@PersistenceContext
 	public void setEntityManager(EntityManager em) {

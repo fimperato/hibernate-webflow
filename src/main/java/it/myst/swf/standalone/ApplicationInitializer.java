@@ -1,3 +1,4 @@
+package it.myst.swf.standalone;
 //package it.myst.swf.core.config.standalone;
 //
 //import javax.servlet.ServletContext;
