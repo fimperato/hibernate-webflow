@@ -1,4 +1,4 @@
-package it.myst.swf.core.config.standalone;
+package it.myst.swf.standalone;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;

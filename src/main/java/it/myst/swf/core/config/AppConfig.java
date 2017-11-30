@@ -8,7 +8,7 @@ import it.myst.swf.core.config.db.HibernateConfiguration;
 import it.myst.swf.core.config.db.PersistenceContextConfiguration;
 
 @Configuration
-@ComponentScan({ "it.myst.swf.utility.domain", "it.myst.swf.utility.service.dao", 
+@ComponentScan({ "it.myst.swf.utility.domain", "it.myst.swf.utility.repository.dao", 
 	"it.myst.swf.utility.business.service", 
 	"it.myst.swf.core.web.backingbean", "it.myst.swf.core.backingbean", 
 	"it.myst.swf.web.backingbean", "it.myst.swf.web.controllerbean", "it.myst.swf.core.spring.utils" })
