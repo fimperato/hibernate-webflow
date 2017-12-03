@@ -1,4 +1,4 @@
-package it.myst.swf.core.spring.cache;
+package it.myst.swf.standalone.cache;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,6 +8,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import it.myst.swf.core.config.AppConfig;
 import it.myst.swf.utility.business.service.UserService;
+import it.myst.swf.utility.domain.entity.User;
 
 public class SpringEhcacheApplication {
 	
@@ -24,6 +25,13 @@ public class SpringEhcacheApplication {
 		
 		UserService obj = context.getBean("userService", UserService.class);
 		
+		// Cachable on entity method:
+//		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
+//   	 	ctx.register(AppConfig.class);
+//   	 	ctx.refresh();
+//        User user=(User) ctx.getBean(User.class);
+//        user.getCachedUser(1);
+        
 		logger.info("# Search user1: ");
 		long initMs = System.currentTimeMillis();
 		obj.findUser("usernametest1");

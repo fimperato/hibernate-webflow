@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.Cacheable;
 
 @Entity
@@ -13,6 +15,8 @@ import org.springframework.cache.annotation.Cacheable;
 public class User implements Serializable {
 
     private static final long serialVersionUID = -3652559447682574722L;
+    
+    private static Logger logger = LoggerFactory.getLogger(User.class);
 
     private String username;
 
@@ -62,11 +66,11 @@ public class User implements Serializable {
     
     @Cacheable("usercache") 
 	public String getCachedUser(int usrId){
-		System.out.println("---Inside getCachedUser() Method---");
+		logger.debug("---Inside getCachedUser() Method---");
 		if(usrId == 1){			
-			return "A-user";
+			return "user-id-1";
 		}else{
-			return "B-user";
+			return "user-id-not-1";
 		}
 	}
     
