@@ -7,19 +7,18 @@ import org.springframework.context.support.AbstractApplicationContext;
 
 import it.myst.swf.core.config.AppConfig;
 import it.myst.swf.utility.business.service.MappaParametriService;
-import it.myst.swf.utility.business.service.impl.MappaParametriServiceImpl;
 import it.myst.swf.utility.domain.entity.MappaParametri;
 
 
-public class AppMain {
+public class SpringCrudAppMain {
 	
-	private static Logger logger = LoggerFactory.getLogger(AppMain.class);
+	private static Logger logger = LoggerFactory.getLogger(SpringCrudAppMain.class);
 	
 	private static String APP_MAIN = "APP";
 
 	public static void main(String args[]) {
 		
-		logger.info("Main class start");
+		logger.info("SpringCrudAppMain class start");
 
 		AbstractApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 		
@@ -31,7 +30,7 @@ public class AppMain {
         MappaParametri mp0 = new MappaParametri();
         mp0.setCodParametro(100);
         mp0.setDesParametro("descrizione");
-        mp0.setUser(AppMain.APP_MAIN);
+        mp0.setUser(SpringCrudAppMain.APP_MAIN);
         MappaParametri mp1 = new MappaParametri();
         mp1.setCodParametro(101);
         
