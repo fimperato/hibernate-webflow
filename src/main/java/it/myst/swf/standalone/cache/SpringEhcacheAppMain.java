@@ -10,9 +10,9 @@ import it.myst.swf.core.config.AppConfig;
 import it.myst.swf.utility.business.service.UserService;
 import it.myst.swf.utility.domain.entity.User;
 
-public class SpringEhcacheApplication {
+public class SpringEhcacheAppMain {
 	
-	private static Logger logger = LoggerFactory.getLogger(SpringEhcacheApplication.class);
+	private static Logger logger = LoggerFactory.getLogger(SpringEhcacheAppMain.class);
 
 	/**
 	 * Main to test ehcache config
