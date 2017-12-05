@@ -10,12 +10,18 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 
 import it.myst.swf.core.config.condition.MvcEnabledCondition;
+import it.myst.swf.utility.domain.entity.User;
 
 @Configuration
 @EnableCaching
 //@ComponentScan(basePackages = "...")
 public class BeanConfig {
 
+	@Bean
+	public User getUser() {
+		return new User();	
+	}
+	
 	@Bean
 	public CacheManager cacheManager() {
 		return new EhCacheCacheManager(ehCacheCacheManager().getObject());

@@ -64,13 +64,22 @@ public class User implements Serializable {
     	return "User(" + username + ")";
     }
     
-    @Cacheable("usercache") 
-	public String getCachedUser(int usrId){
+    @Cacheable("userCache") 
+	public String getCachedUser(String usrId){
 		logger.debug("---Inside getCachedUser() Method---");
-		if(usrId == 1){			
-			return "user-id-1";
+		pause(3000L);
+		if(usrId.equals("user_A")){			
+			return "user_A";
 		}else{
-			return "user-id-not-1";
+			return "user_B";
+		}
+	}
+    
+    private void pause(long sec) {
+		try {
+			Thread.sleep(sec);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
 	}
     
