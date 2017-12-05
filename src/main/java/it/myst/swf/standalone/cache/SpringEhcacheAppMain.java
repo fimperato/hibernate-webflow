@@ -23,14 +23,8 @@ public class SpringEhcacheAppMain {
 
 		ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 		
+		// ##### Service level cache ##### 
 		UserService obj = context.getBean("userService", UserService.class);
-		
-		// Cachable on entity method:
-//		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
-//   	 	ctx.register(AppConfig.class);
-//   	 	ctx.refresh();
-//        User user=(User) ctx.getBean(User.class);
-//        user.getCachedUser(1);
         
 		logger.info("# Search user1: ");
 		long initMs = System.currentTimeMillis();
@@ -52,6 +46,38 @@ public class SpringEhcacheAppMain {
 		
 		// Close application context (destroy also cached resources)
 		((ConfigurableApplicationContext) context).close();
-
+		// ##### Service level cache END ##### 
+		
+		
+		// ##### Entity level cache ##### 
+		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
+		ctx.register(AppConfig.class);
+		ctx.refresh();
+		User user=(User)ctx.getBean(User.class);
+		
+		// calling getCachedUser method first time:
+		initMs = System.currentTimeMillis();
+		logger.info("## Search user-A ##");
+		logger.info("User: "+ user.getCachedUser("user_A"));
+		finalMs = System.currentTimeMillis();
+		logger.info("--> Time to fetch: " + (finalMs - initMs)/1000 + " sec");
+		
+		// ..and second time: method will not execute this time:
+		initMs = System.currentTimeMillis();
+		logger.info("## Search user-A (second time result will be fetched from cache) ##");
+		logger.info("User: "+user.getCachedUser("user_A"));
+		finalMs = System.currentTimeMillis();
+		logger.info("--> Time to fetch: " + (finalMs - initMs)/1000 + " sec");
+		
+		//calling getCachedUser method third time with different value.
+		initMs = System.currentTimeMillis();
+		logger.info("## Search user-B (not in cache) ##");
+		logger.info("User: "+user.getCachedUser("user_B"));
+		finalMs = System.currentTimeMillis();
+		logger.info("--> Time to fetch: " + (finalMs - initMs)/1000 + " sec");
+		
+		ctx.close();
+		// ##### Entity level cache END ##### 
+		
 	}
 }
