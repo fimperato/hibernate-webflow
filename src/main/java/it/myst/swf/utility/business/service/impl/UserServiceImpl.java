@@ -26,7 +26,6 @@ public class UserServiceImpl implements UserService {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		
 	}
 
 }

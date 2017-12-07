@@ -7,6 +7,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import it.myst.swf.core.config.AppConfig;
+import it.myst.swf.utility.business.service.MappaParametriService;
 import it.myst.swf.utility.business.service.UserService;
 import it.myst.swf.utility.domain.entity.User;
 
@@ -24,25 +25,11 @@ public class SpringEhcacheAppMain {
 		ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 		
 		// ##### Service level cache ##### 
-		UserService obj = context.getBean("userService", UserService.class);
-        
-		logger.info("# Search user1: ");
-		long initMs = System.currentTimeMillis();
-		obj.findUser("usernametest1");
-		long finalMs = System.currentTimeMillis();
-		logger.info("--> Time to fetch user1: " + (finalMs - initMs)/1000 + " sec");
+		UserService userService = context.getBean("userService", UserService.class);
+		MappaParametriService mappaParametriService = context.getBean("mappaParametriService", MappaParametriService.class);
 		
-		logger.info("# Search user1 again: ");
-		initMs = System.currentTimeMillis();
-		obj.findUser("usernametest1");
-		finalMs = System.currentTimeMillis();
-		logger.info("--> Time to fetch user1 (cached): " + (finalMs - initMs)/1000 + " sec");
-		
-		logger.info("# Search user2: ");
-		initMs = System.currentTimeMillis();
-		obj.findUser("usernametest2");
-		finalMs = System.currentTimeMillis();
-		logger.info("--> Time to fetch user2 (not cached) " + (finalMs - initMs)/1000 + " sec");
+		testUserServiceCache(userService);
+		testMappaParametriServiceCache(mappaParametriService);
 		
 		// Close application context (destroy also cached resources)
 		((ConfigurableApplicationContext) context).close();
@@ -54,6 +41,7 @@ public class SpringEhcacheAppMain {
 		ctx.register(AppConfig.class);
 		ctx.refresh();
 		User user=(User)ctx.getBean(User.class);
+		long initMs=0, finalMs=0;
 		
 		// calling getCachedUser method first time:
 		initMs = System.currentTimeMillis();
@@ -79,5 +67,39 @@ public class SpringEhcacheAppMain {
 		ctx.close();
 		// ##### Entity level cache END ##### 
 		
+	}
+
+	private static void testUserServiceCache(UserService userService) {
+		logger.info("# Search user1: ");
+		long initMs = System.currentTimeMillis();
+		userService.findUser("usernametest1");
+		long finalMs = System.currentTimeMillis();
+		logger.info("--> Time to fetch user1: " + (finalMs - initMs)/1000 + " sec");
+		
+		logger.info("# Search user1 again: ");
+		initMs = System.currentTimeMillis();
+		userService.findUser("usernametest1");
+		finalMs = System.currentTimeMillis();
+		logger.info("--> Time to fetch user1 (cached): " + (finalMs - initMs)/1000 + " sec");
+		
+		logger.info("# Search user2: ");
+		initMs = System.currentTimeMillis();
+		userService.findUser("usernametest2");
+		finalMs = System.currentTimeMillis();
+		logger.info("--> Time to fetch user2 (not cached) " + (finalMs - initMs)/1000 + " sec");
+	}
+	
+	private static void testMappaParametriServiceCache(MappaParametriService mappaParametriService) {
+		logger.info("[testMappaParametriServiceCache] (#1)");
+		long initMs = System.currentTimeMillis();
+		mappaParametriService.getAllEntities();
+		long finalMs = System.currentTimeMillis();
+		logger.info("--> Time to fetch all parameters: " + (finalMs - initMs)/1000 + " sec");
+		
+		logger.info("(#2)");
+		initMs = System.currentTimeMillis();
+		mappaParametriService.getAllEntities();
+		finalMs = System.currentTimeMillis();
+		logger.info("--> Time to fetch all parameters (cached): " + (finalMs - initMs)/1000 + " sec");
 	}
 }

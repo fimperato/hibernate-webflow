@@ -5,6 +5,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,8 +22,17 @@ public class MappaParametriServiceImpl implements MappaParametriService {
 	@Autowired
 	MappaParametriRepo mappaParametriRepo;
 	
+	/**
+	 * Iterable<MappaParametri> will be the key against the return value of getAllEntities will be saved in Cache.
+	 * So, unless the list of IDs that are being input to your getAllEntities contains exactly same IDs 
+	 * as in one of the previous calls, it will be a cache miss and data will be fetched from DB. 
+	 * (NOTE: Two lists are considered equal if they exactly contain same elements and in same order)
+	 */
 	@Override
+	@Cacheable(value="mappaParametriCache")
 	public Iterable<MappaParametri> getAllEntities() {
+		pause(3000L);
+		logger.info("MappaParametri not cached. Fetching..");
 		return mappaParametriRepo.findAll();
 	}
 	
@@ -50,4 +60,13 @@ public class MappaParametriServiceImpl implements MappaParametriService {
 		mappaParametriRepo.delete(entity);
 		logger.info("[Service] Delete entity with id: "+id+" completed");
 	}
+	
+	private void pause(long sec) {
+		try {
+			Thread.sleep(sec);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+	
 }
