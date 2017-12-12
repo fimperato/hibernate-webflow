@@ -8,11 +8,13 @@
     - Java Configuration
     - Log4j
  
+ 
 ## Test 
 
   Settare i proprio parametri di connessione sul persistence.properties. 
 
 ### Test Main:
+
   Eseguire SpringCrudAppMain per i test di configurazione, connessione e operazioni CRUD.
   Eseguire SpringEhcacheAppMain per i test/inizializzazione su EhCache.
 
